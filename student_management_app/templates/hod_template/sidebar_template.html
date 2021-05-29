@@ -1,0 +1,187 @@
+{% load static %}
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="index3.html" class="brand-link">
+      <img src="{% static "dist/img/BlockChainIntroduction.PNG" %}" alt="QA Innovation Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">School Management</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="{% static "dist/img/AbhishekJain.png" %}" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">{{ user.username }}</a>
+        </div>
+      </div>
+
+      <!-- SidebarSearch Form -->
+      <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-sidebar">
+              <i class="fas fa-search fa-fw"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Admin Features
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/admin_home" class="nav-link {% if request.path == "/admin_home" %} active {% endif %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Home
+                <span class="right badge badge-warning">InProgress</span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/add_staff" class="nav-link {% if request.path == "/add_staff" %} active {% endif %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Add Staff
+                <span class="right badge badge-success">Done</span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/manage_staff" class="nav-link {% if request.path == "/manage_staff" %} active {% endif %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Manage Staff
+                <span class="right badge badge-success">Done</span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/add_student" class="nav-link {% if request.path == "/add_student" %} active {% endif %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Add Student
+                <span class="right badge badge-success">Done</span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/manage_student" class="nav-link {% if request.path == "/manage_student" %} active {% endif %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Manage Student
+                <span class="right badge badge-success">Done</span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/add_course" class="nav-link {% if request.path == "/add_course" %} active {% endif %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Add Course
+                <span class="right badge badge-success">Done</span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/manage_course" class="nav-link {% if request.path == "/manage_course" %} active {% endif %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Manage Course
+                <span class="right badge badge-success">Done</span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/add_subject" class="nav-link {% if request.path == "/add_subject" %} active {% endif %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Add Subject
+                <span class="right badge badge-success">Done</span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/manage_subject" class="nav-link {% if request.path == "/manage_subject" %} active {% endif %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Manage Subject
+                <span class="right badge badge-success">Done</span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/manage_session" class="nav-link {% if request.path == "/manage_session" %} active {% endif %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Manage Session Year
+                <span class="right badge badge-success">Done</span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/student_feedback_message" class="nav-link {% if request.path == "/student_feedback_message" %} active {% endif %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Student Feedback
+                <span class="right badge badge-success">Done</span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/staff_feedback_message" class="nav-link {% if request.path == "/staff_feedback_message" %} active {% endif %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Staff Feedback
+                <span class="right badge badge-success">Done</span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/staff_leave_view" class="nav-link {% if request.path == "/staff_leave_view" %} active {% endif %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Staff Leave
+                <span class="right badge badge-info">Done</span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/student_leave_view" class="nav-link {% if request.path == "/student_leave_view" %} active {% endif %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Student Leave
+                <span class="right badge badge-info">Done</span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/admin_view_attendance" class="nav-link {% if request.path == "/admin_view_attendance" %} active {% endif %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                View Attendance
+                <span class="right badge badge-danger">Progress</span>
+              </p>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>

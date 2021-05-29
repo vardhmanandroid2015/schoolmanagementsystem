@@ -1,0 +1,116 @@
+{% extends 'hod_template/base_template.html' %}
+{% load static %}
+{% block page_title %}
+Manage Student Feedback
+{% endblock page_title %}
+{% block main_content %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+          <div class="row">
+             <div class="col-md-12">
+                 <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Manage Student Feedback</h3>
+                    </div>
+                    <!-- /.table div Start-->
+                    <div class="table">
+                        <table class="table">
+                            <tr>
+                                <th>Feedback ID</th>
+                                <th>Student ID</th>
+                                <th>Student Name</th>
+                                <th>Student Session</th>
+                                <th>Feedback Message</th>
+                                <th>Provided On</th>
+                                <th>Feedback Reply</th>
+                            </tr>
+                            {% for row in feedback_data %}
+                                <tr>
+                                    <td>{{ row.id }}</td>
+                                    <td>{{ row.student_id.admin.id }}</td>
+                                    <td>{{ row.student_id.admin.first_name }} {{ row.student_id.admin.last_name }}</td>
+                                    <td>{{ row.student_id.admin.session_id.session_start_year }} - {{ row.student_id.admin.session_id.session_end_year }}</td>
+                                    <td>{{ row.feedback_message }}</td>
+                                    <td>{{ row.created_at }}</td>
+                                    <td>
+                                      {% if row.feedback_reply == "Reply awaited from admin" %}
+                                        <button class="btn btn-success reply_open_modal" data-toggle="modal" data-target="#reply_modal">Reply</button>
+                                      {% else %}
+                                        {{ row.feedback_reply }}
+                                      {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                    <!-- /.table div End-->
+                 </div><!-- /.card-primary line12 -->
+             </div><!-- /.col-md-12 line11 -->
+          </div><!-- /.row line10 -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+<!-- Modal Start-->
+<div id="reply_modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Feedback Reply</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Reply To : <span id="reply_name"></span></p>
+          <input type="hidden" id="reply_id" name="reply_id">
+          <textarea class="form-control" rows="5" id="reply_message"></textarea>
+          <button id="reply_btn" class="btn btn-info btn-block">Reply</button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal End-->
+
+{% endblock main_content %}
+{% block custom_js %}
+<script>
+    $(document).ready(function(){
+        $(".reply_open_modal").click(function(){
+            var id   = $(this).parents("tr").children("td:eq(0)").text();
+            var name = $(this).parents("tr").children("td:eq(2)").text();
+            $("#reply_id").val(id);
+            $("#reply_name").text(name);
+        });
+
+        $(document).on("click","#reply_btn",function(){
+                $(this).attr("disabled","disabled")
+                $(this).text("Sending reply to feedback...")
+
+                var feedback_id=$("#reply_id").val()
+                var feedback_reply_message=$("#reply_message").val()
+
+                $.ajax({
+                    url: '{% url 'student_feedback_message_replier' %}',
+                    type: 'POST',
+                    data: {feedback_id:feedback_id, feedback_reply_message:feedback_reply_message},
+                })
+                .done(function(response){
+                    if(response == "True"){
+                        alert("Successfully Reply Sent");
+                    }
+                    else{
+                        alert("Error in sending reply due to not return response as True");
+                    }
+                    location.reload()
+                })
+                .fail(function(){
+                    alert("Error in sending reply due to response failure");
+                })
+        })
+    })
+</script>
+{% endblock custom_js %}
